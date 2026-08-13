@@ -30,7 +30,7 @@
     </script>
 
     <style>
-        /* TEMA DEFAULT (GELAP) */
+        /* TEMA DEFAULT (GELAP) - Sekarang jadi fallback kedua */
         body { 
             background-color: #121214; 
             color: #ffffff;
@@ -70,23 +70,85 @@
         body.light-mode .hover\:bg-white\/10:hover { background-color: rgba(0,0,0,0.05) !important; }
         body.light-mode .report-menu-btn { background: rgba(255, 255, 255, 0.6); }
 
-        /* PENGECUALIAN: Teks di atas gambar Dashboard tetap terang meski Light Mode */
+        /* PERBAIKAN SIDEBAR KIRI MODE TERANG */
+        body.light-mode aside {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            border-right-color: rgba(0, 0, 0, 0.08) !important;
+        }
+        body.light-mode aside .bg-white\/10 {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+        body.light-mode aside .h-\[1px\] {
+            background-color: rgba(0, 0, 0, 0.1) !important;
+        }
+        body.light-mode #left-home.text-white {
+            color: #0f172a !important;
+        }
+        body.light-mode aside button:hover:not(.active-left):not(#left-apps) {
+            background-color: rgba(0, 0, 0, 0.08) !important;
+            color: #0f172a !important;
+        }
+        body.light-mode #global-tooltip {
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #0f172a;
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        /* PENGECUALIAN: Teks di atas gambar Dashboard Home tetap terang meski Light Mode */
         body.light-mode #view-home .text-white { color: #ffffff !important; }
         body.light-mode #view-home .text-gray-200 { color: #e5e7eb !important; }
         body.light-mode #view-home .text-gray-300 { color: #d1d5db !important; }
         body.light-mode #view-home .text-gray-400 { color: #9ca3af !important; }
         body.light-mode #view-home .border-white\/20 { border-color: rgba(255,255,255,0.2) !important; }
-        
-        /* ------------------------------------------- */
+        body.light-mode #view-home .glass-panel { background: rgba(0, 0, 0, 0.5) !important; }
 
-        /* HACK: Memotong UI Hitam (Header & Footer) bawaan Google Drive */
-        .crop-drive-ui {
-            position: absolute !important;
-            top: -56px !important;       /* Potong 56px ke atas untuk hilangkan Header hitam */
-            left: -10px !important;      /* Potong 10px ke kiri */
-            width: calc(100% + 20px) !important;  /* Perlebar ukuran untuk menutupi potongan */
-            height: calc(100% + 116px) !important; /* Pertinggi agar kontrol zoom di bawah keluar area */
+        /* RO & ORIN TABLE LIGHT MODE CUSTOMIZATIONS */
+        body.light-mode .custom-table-view .bg-panel { background-color: rgba(255, 255, 255, 0.95); }
+        body.light-mode .custom-table-view input { background-color: #f1f5f9; color: #0f172a; border-color: rgba(0,0,0,0.15); }
+        body.light-mode .custom-table-view thead { background-color: #f1f5f9; color: #0f172a; }
+        body.light-mode .custom-table-view thead th { color: #0f172a !important; }
+        body.light-mode .custom-table-view tbody { color: #334155; }
+        body.light-mode .custom-table-view tr.hover\:bg-white\/5:hover { background-color: rgba(0,0,0,0.05) !important; }
+        body.light-mode .custom-table-view th, body.light-mode .custom-table-view td { border-color: rgba(0,0,0,0.08) !important; }
+        body.light-mode .status-overlay { background-color: #ffffff; color: #64748b; }
+        body.light-mode .btn-pagination { background-color: #f1f5f9; color: #0f172a; border-color: rgba(0,0,0,0.1); }
+        body.light-mode .btn-pagination:hover:not(:disabled) { background-color: #e2e8f0; }
+        body.light-mode .suggestions-box { background-color: #ffffff; border-color: rgba(0,0,0,0.15); color: #0f172a; }
+        body.light-mode .suggestion-item:hover, body.light-mode .suggestion-item.active-suggestion { background-color: #f1f5f9; color: #2563eb; }
+        
+        /* Excel Filter Popup Menu Light/Dark */
+        .excel-dropdown-menu {
+            background-color: #1c1c1f;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
         }
+        body.light-mode .excel-dropdown-menu {
+            background-color: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            color: #0f172a;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+        body.light-mode .excel-dropdown-menu input {
+            background-color: #f8fafc !important;
+            color: #0f172a !important;
+            border-color: rgba(0, 0, 0, 0.2) !important;
+        }
+        body.light-mode .excel-dropdown-menu input::placeholder {
+            color: #94a3b8 !important;
+        }
+        body.light-mode .excel-menu-item:hover {
+            background-color: #f1f5f9;
+            color: #2563eb;
+        }
+        body.light-mode .excel-divider {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        body.light-mode .excel-chk-container {
+            background-color: #f8fafc !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+        }
+        /* ------------------------------------------- */
 
         /* Center Content Animations */
         .view-layer {
@@ -124,7 +186,7 @@
             }
         }
         
-        /* Mobile / Tablet (Menjadi laci / slide-over) */
+        /* Mobile / Tablet */
         @media (max-width: 1023px) {
             #right-panel {
                 position: absolute;
@@ -173,116 +235,74 @@
         }
 
         /* Custom Scrollbars */
-        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(150,150,150,0.3); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(150,150,150,0.5); }
         .custom-scrollbar-left::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="h-screen flex text-sm transition-colors">
+<!-- TAMBAH KELAS 'light-mode' DI BODY SEBAGAI DEFAULT -->
+<body class="h-screen flex text-sm transition-colors light-mode">
+
+    <!-- TOOLTIP GLOBAL -->
+    <div id="global-tooltip" class="fixed z-[9999] bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap shadow-xl opacity-0 pointer-events-none transition-opacity duration-200" style="left: 0; top: 0;"></div>
 
     <!-- LEFT SIDEBAR -->
     <aside class="w-[60px] md:w-[80px] h-full flex flex-col items-center py-4 md:py-6 border-r border-white/5 bg-panel/90 z-40 shrink-0 transition-all">
         
         <!-- Top Core Icons -->
         <div class="flex flex-col gap-3 md:gap-4 w-full items-center mb-4">
-            <!-- Home Icon -->
-            <button id="left-home" onclick="goHome()" class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-2xl text-white bg-white/10 hover:bg-white/20 transition border border-transparent">
+            <button id="left-home" onclick="goHome()" onmouseenter="showTooltip(this, 'Home Dashboard')" onmouseleave="hideTooltip()" class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-2xl text-white bg-white/10 hover:bg-white/20 transition border border-transparent">
                 <i class="fa-solid fa-house-chimney text-lg md:text-xl"></i>
             </button>
-            
-            <!-- Apps Icon (Toggle Right Panel) -->
-            <button id="left-apps" onclick="toggleRightPanel()" class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-[18px] bg-accent text-dark shadow-[0_0_20px_rgba(74,222,128,0.4)] transition">
+            <button id="left-apps" onclick="toggleRightPanel()" onmouseenter="showTooltip(this, 'Toggle Menu')" onmouseleave="hideTooltip()" class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-[18px] bg-accent text-dark shadow-[0_0_20px_rgba(74,222,128,0.4)] transition">
                 <i class="fa-solid fa-border-all text-lg md:text-xl"></i>
             </button>
         </div>
 
-        <!-- Line Separator -->
         <div class="w-6 md:w-8 h-[1px] bg-white/10 my-1 md:my-2"></div>
 
-        <!-- 10 Menu Icons (With Tooltips for Desktop) -->
+        <!-- Menu Icons -->
         <div class="flex-1 w-full flex flex-col items-center gap-2 md:gap-3 overflow-y-auto custom-scrollbar-left pb-4 pt-2 relative">
-            
-            <div class="relative group flex items-center justify-center w-full">
-                <button id="left-btn-1" onclick="openMenu(1)" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent">
-                    <i class="fa-solid fa-folder-open text-base md:text-lg"></i>
-                </button>
-                <span class="hidden md:block absolute left-16 bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">LOOKUP DATA OTOMATIS</span>
+            <div class="w-full flex justify-center">
+                <button id="left-btn-1" onclick="openMenu(1)" onmouseenter="showTooltip(this, 'GRAMEDIA SMART SYSTEM')" onmouseleave="hideTooltip()" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent"><i class="fa-solid fa-folder-open text-base md:text-lg"></i></button>
             </div>
-
-            <div class="relative group flex items-center justify-center w-full">
-                <button id="left-btn-2" onclick="openMenu(2)" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent">
-                    <i class="fa-solid fa-address-book text-base md:text-lg"></i>
-                </button>
-                <span class="hidden md:block absolute left-16 bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">ID ORIN GRAMEDIA X KODE BSOFT</span>
+            <div class="w-full flex justify-center">
+                <button id="left-btn-2" onclick="openMenu(2)" onmouseenter="showTooltip(this, 'ID ORIN GRAMEDIA X KODE BSOFT')" onmouseleave="hideTooltip()" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent"><i class="fa-solid fa-address-book text-base md:text-lg"></i></button>
             </div>
-
-            <div class="relative group flex items-center justify-center w-full">
-                <button id="left-btn-3" onclick="openMenu(3)" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent">
-                    <i class="fa-solid fa-box text-base md:text-lg"></i>
-                </button>
-                <span class="hidden md:block absolute left-16 bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">Report Stock Status Gramedia (GAM)</span>
+            <div class="w-full flex justify-center">
+                <button id="left-btn-3" onclick="openMenu(3)" onmouseenter="showTooltip(this, 'Report Stock Status Gramedia (GAM)')" onmouseleave="hideTooltip()" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent"><i class="fa-solid fa-box text-base md:text-lg"></i></button>
             </div>
-
-            <div class="relative group flex items-center justify-center w-full">
-                <button id="left-btn-4" onclick="openMenu(4)" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent">
-                    <i class="fa-solid fa-layer-group text-base md:text-lg"></i>
-                </button>
-                <span class="hidden md:block absolute left-16 bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">Rekap STO Gramedia</span>
+            <div class="w-full flex justify-center">
+                <button id="left-btn-4" onclick="openMenu(4)" onmouseenter="showTooltip(this, 'Rekap STO Gramedia')" onmouseleave="hideTooltip()" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent"><i class="fa-solid fa-layer-group text-base md:text-lg"></i></button>
             </div>
-
-            <div class="relative group flex items-center justify-center w-full">
-                <button id="left-btn-5" onclick="openMenu(5)" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent">
-                    <i class="fa-solid fa-chart-column text-base md:text-lg"></i>
-                </button>
-                <span class="hidden md:block absolute left-16 bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">Rekap RO Gramedia 2026</span>
+            <div class="w-full flex justify-center">
+                <button id="left-btn-5" onclick="openMenu(5)" onmouseenter="showTooltip(this, 'Rekap RO Gramedia 2026')" onmouseleave="hideTooltip()" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent"><i class="fa-solid fa-chart-column text-base md:text-lg"></i></button>
             </div>
-
-            <div class="relative group flex items-center justify-center w-full">
-                <button id="left-btn-6" onclick="openMenu(6)" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent">
-                    <i class="fa-solid fa-book-open text-base md:text-lg"></i>
-                </button>
-                <span class="hidden md:block absolute left-16 bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">E-Catalog Penawaran Gramedia</span>
+            <div class="w-full flex justify-center">
+                <button id="left-btn-6" onclick="openMenu(6)" onmouseenter="showTooltip(this, 'E-Catalog Penawaran Gramedia')" onmouseleave="hideTooltip()" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent"><i class="fa-solid fa-book-open text-base md:text-lg"></i></button>
             </div>
-
-            <div class="relative group flex items-center justify-center w-full">
-                <button id="left-btn-7" onclick="openMenu(7)" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent">
-                    <i class="fa-solid fa-building text-base md:text-lg"></i>
-                </button>
-                <span class="hidden md:block absolute left-16 bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">DATA TOKO GRAMEDIA</span>
+            <div class="w-full flex justify-center">
+                <button id="left-btn-7" onclick="openMenu(7)" onmouseenter="showTooltip(this, 'DATA TOKO GRAMEDIA')" onmouseleave="hideTooltip()" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent"><i class="fa-solid fa-building text-base md:text-lg"></i></button>
             </div>
-
-            <div class="relative group flex items-center justify-center w-full">
-                <button id="left-btn-8" onclick="openMenu(8)" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent">
-                    <i class="fa-solid fa-sack-dollar text-base md:text-lg"></i>
-                </button>
-                <span class="hidden md:block absolute left-16 bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">Laku Jual Gramedia 2026 (GAM)</span>
+            <div class="w-full flex justify-center">
+                <button id="left-btn-8" onclick="openMenu(8)" onmouseenter="showTooltip(this, 'Laku Jual Gramedia 2026 (GAM)')" onmouseleave="hideTooltip()" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent"><i class="fa-solid fa-sack-dollar text-base md:text-lg"></i></button>
             </div>
-
-            <div class="relative group flex items-center justify-center w-full">
-                <button id="left-btn-9" onclick="openMenu(9)" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent">
-                    <i class="fa-solid fa-money-bill-wave text-base md:text-lg"></i>
-                </button>
-                <span class="hidden md:block absolute left-16 bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">Consigment Advice Per Store 2026 (GAM)</span>
+            <div class="w-full flex justify-center">
+                <button id="left-btn-9" onclick="openMenu(9)" onmouseenter="showTooltip(this, 'Consigment Advice Per Store 2026 (GAM)')" onmouseleave="hideTooltip()" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent"><i class="fa-solid fa-money-bill-wave text-base md:text-lg"></i></button>
             </div>
-
-            <div class="relative group flex items-center justify-center w-full">
-                <!-- UPDATE IKON KE TWIDY TOOLS -->
-                <button id="left-btn-10" onclick="openMenu(10)" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent">
-                    <i class="fa-solid fa-screwdriver-wrench text-base md:text-lg"></i>
-                </button>
-                <span class="hidden md:block absolute left-16 bg-panel border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">TWIDY TOOLS</span>
+            <div class="w-full flex justify-center">
+                <button id="left-btn-10" onclick="openMenu(10)" onmouseenter="showTooltip(this, 'TWIDY TOOLS')" onmouseleave="hideTooltip()" class="left-icon-btn w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 border border-transparent"><i class="fa-solid fa-screwdriver-wrench text-base md:text-lg"></i></button>
             </div>
         </div>
 
-        <!-- Line Separator -->
         <div class="w-6 md:w-8 h-[1px] bg-white/10 mt-1 mb-2"></div>
 
-        <!-- Bottom Icon (THEME TOGGLE) -->
-        <div class="pb-2">
-            <button onclick="toggleTheme()" class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-2xl text-gray-400 hover:text-accent transition">
-                <i id="theme-icon" class="fa-regular fa-sun text-xl md:text-2xl"></i>
+        <div class="pb-2 w-full flex justify-center">
+            <button onclick="toggleTheme()" onmouseenter="showTooltip(this, 'Ubah Tema')" onmouseleave="hideTooltip()" class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-2xl text-gray-400 hover:text-accent transition">
+                <!-- ICON BULAN SEBAGAI DEFAULT UNTUK PINDAH KE MODE GELAP -->
+                <i id="theme-icon" class="fa-regular fa-moon text-xl md:text-2xl"></i>
             </button>
         </div>
     </aside>
@@ -299,7 +319,6 @@
                 <p id="current-date" class="text-textDim text-xs md:text-sm mt-0.5 md:mt-1"></p>
             </div>
             
-            <!-- Widget Panel Kanan Atas -->
             <div class="glass-panel px-3 py-2 md:px-4 rounded-full flex items-center gap-2 md:gap-4 border border-white/10">
                 <div class="hidden sm:flex items-center gap-2 text-gray-300 text-xs xl:text-sm">
                     <i class="fa-solid fa-cloud-sun text-amber-400"></i> <span>28°C</span>
@@ -317,7 +336,7 @@
         <div class="relative z-10 flex flex-col lg:flex-row gap-4 lg:gap-6 h-[calc(100%-4rem)] md:h-[calc(100%-5rem)] xl:h-[calc(100%-6rem)]">
             
             <!-- CENTER AREA -->
-            <div class="flex-1 w-full relative rounded-[20px] md:rounded-[32px] overflow-hidden border border-white/10 shadow-2xl bg-panel transition-all duration-400">
+            <div class="flex-1 w-full relative rounded-[20px] md:rounded-[32px] overflow-hidden border border-white/10 shadow-2xl bg-panel transition-all duration-400 flex flex-col min-h-0">
                 
                 <!-- LAYER 0: HOME -->
                 <div id="view-home" class="view-layer active">
@@ -325,16 +344,13 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent"></div>
                     
                     <div class="absolute inset-0 p-5 md:p-8 flex flex-col justify-between">
-                        <!-- Judul Kiri Atas -->
                         <div>
                             <h2 class="text-3xl md:text-4xl font-bold text-white mb-1 md:mb-2 tracking-tight drop-shadow-lg">Welcome Back</h2>
                             <p class="text-gray-200 text-xs md:text-sm drop-shadow-md">Everything you need for today's operations.</p>
                         </div>
                         
-                        <!-- Widget Sistem -->
                         <div class="w-full flex justify-center pb-2">
                             <div class="glass-panel rounded-2xl py-3 px-4 md:py-4 md:px-8 flex flex-col sm:flex-row gap-4 sm:gap-8 md:gap-12 items-center border border-white/10 shadow-2xl !bg-black/60 backdrop-blur-md">
-                                
                                 <div class="flex items-center gap-3 md:gap-4 sm:pr-6 md:pr-10 border-b sm:border-b-0 sm:border-r border-white/20 pb-3 sm:pb-0 w-full sm:w-auto justify-between sm:justify-start">
                                     <div class="flex items-center gap-3">
                                         <i class="fa-solid fa-wifi text-gray-300 text-lg md:text-xl"></i>
@@ -345,7 +361,6 @@
                                     </div>
                                     <span class="flex items-center gap-2 text-accent text-xs md:text-sm font-bold ml-2">Online <div class="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_10px_#4ade80]"></div></span>
                                 </div>
-                                
                                 <div class="flex items-center gap-3 md:gap-4 w-full sm:w-auto justify-between sm:justify-start">
                                     <div class="flex items-center gap-3">
                                         <i class="fa-solid fa-microchip text-gray-300 text-lg md:text-xl"></i>
@@ -356,7 +371,6 @@
                                     </div>
                                     <span class="text-accent text-xs md:text-sm font-bold ml-2">44 MB</span>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
@@ -370,59 +384,189 @@
                                 <i class="fa-solid fa-folder-open text-base md:text-lg"></i>
                             </div>
                             <div class="truncate">
-                                <h2 class="text-base md:text-lg font-bold text-white leading-tight truncate">LOOKUP DATA</h2>
+                                <h2 class="text-base md:text-lg font-bold text-white leading-tight truncate">GRAMEDIA SMART SYSTEM</h2>
                                 <p class="text-[10px] md:text-xs text-textDim truncate">Web App Integration</p>
                             </div>
                         </div>
                         <div class="flex gap-2 shrink-0">
-                            <button onclick="toggleRightPanel()" class="flex px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition items-center justify-center gap-2">
-                                <i class="fa-solid fa-list-ul"></i> <span class="hidden sm:inline">Menu</span>
-                            </button>
-                            <a href="https://lookupdata-gramedia.vercel.app/" target="_blank" class="px-3 py-2 md:px-4 md:py-2 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center gap-2">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden sm:inline">Buka Tab</span>
-                            </a>
+                            <button onclick="refreshIframe('lookup-iframe', this)" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center justify-center gap-2"><i class="fa-solid fa-arrows-rotate transition-transform duration-500"></i> <span class="hidden sm:inline">Refresh</span></button>
+                            <button onclick="toggleRightPanel()" class="flex px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition items-center justify-center gap-2"><i class="fa-solid fa-list-ul"></i> <span class="hidden sm:inline">Menu</span></button>
+                            <a href="https://lookupdata-gramedia.vercel.app/" target="_blank" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center gap-2"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden sm:inline">Tab Baru</span></a>
                         </div>
                     </div>
-                    <div class="flex-1 w-full relative">
-                        <iframe src="https://lookupdata-gramedia.vercel.app/" class="absolute inset-0 w-full h-full border-none"></iframe>
+                    <div class="flex-1 w-full relative min-h-0">
+                        <iframe id="lookup-iframe" src="https://lookupdata-gramedia.vercel.app/" class="absolute inset-0 w-full h-full border-none"></iframe>
                     </div>
                 </div>
 
-                <!-- LAYER 2: SPREADSHEETS ONLINE DYNAMIC (MENU 2 - 9) -->
-                <div id="view-excel" class="view-layer flex flex-col bg-white">
-                    <div class="px-4 md:px-6 py-3 md:py-4 flex justify-between items-center bg-panel border-b border-white/10 shrink-0 gap-2">
-                        <div class="flex items-center gap-3 min-w-0">
-                            <div id="excel-icon-box" class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 shrink-0">
-                                <i id="excel-icon" class="fa-solid fa-box text-base md:text-lg"></i>
+                <!-- LAYER 2: ID ORIN GRAMEDIA X KODE BSOFT (MENU 2 - CUSTOM TABLE HTML/JS) -->
+                <div id="view-orin-table" class="view-layer custom-table-view flex flex-col bg-white">
+                    <!-- Top Actions Bar -->
+                    <div class="px-4 md:px-6 py-3 md:py-4 flex justify-between items-center bg-panel border-b border-white/10 shrink-0 gap-2 overflow-x-auto custom-scrollbar-left">
+                        <div class="flex items-center gap-3 min-w-0 pr-4">
+                            <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#245e69]/20 flex items-center justify-center text-[#5bc9d9] shrink-0">
+                                <i class="fa-solid fa-address-book text-base md:text-lg"></i>
                             </div>
+                            <div class="truncate">
+                                <h2 class="text-base md:text-lg font-bold text-white leading-tight truncate">ID ORIN GRAMEDIA X KODE BSOFT</h2>
+                                <p class="text-[10px] md:text-xs text-textDim truncate">Custom Table Integration</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 shrink-0">
+                            <button onclick="fetchORINData(this)" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrows-rotate transition-transform duration-500"></i> <span class="hidden sm:inline">Refresh</span>
+                            </button>
+                            <button onclick="toggleRightPanel()" class="flex px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition items-center justify-center gap-2">
+                                <i class="fa-solid fa-list-ul"></i> <span class="hidden sm:inline">Menu</span>
+                            </button>
+                            <a href="https://docs.google.com/spreadsheets/d/1U2jYvdm-ZYXOSh2MQe04nQJXNkfOExIiFvmh8K-hNkM/edit" target="_blank" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center gap-2">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden sm:inline">Full</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1U2jYvdm-ZYXOSh2MQe04nQJXNkfOExIiFvmh8K-hNkM/export?format=xlsx" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-accent hover:bg-accent/80 text-dark font-bold text-sm transition flex items-center gap-2 shadow-[0_0_15px_rgba(74,222,128,0.3)]">
+                                <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">Unduh</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 w-full relative flex flex-col bg-panel min-h-0">
+                        <!-- Search & Status Bar dengan Smart Google-like Suggestions -->
+                        <div class="px-4 py-3 border-b border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3 shrink-0 relative">
+                            <div class="relative w-full sm:w-96 lg:w-[450px]">
+                                <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="orin-search" autocomplete="off" oninput="onOrinGlobalSearchInput(event)" onkeydown="onOrinGlobalSearchKeydown(event)" placeholder="Ketik kata kunci pencarian..." class="w-full bg-[#121214] border border-white/10 text-white rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-accent transition text-sm">
+                                
+                                <div id="orin-search-suggestions" class="suggestions-box absolute left-0 right-0 top-full mt-1 bg-[#1c1c1f] border border-white/20 rounded-lg shadow-2xl z-50 max-h-60 overflow-y-auto hidden custom-scrollbar"></div>
+                            </div>
+                            <div id="orin-count" class="text-xs md:text-sm text-textDim font-medium font-mono whitespace-nowrap">
+                                Menampilkan 0 dari 0 data
+                            </div>
+                        </div>
+
+                        <!-- Data Table Container -->
+                        <div class="flex-1 overflow-auto custom-scrollbar relative min-h-0" id="orin-table-container">
+                            <div id="orin-status" class="status-overlay absolute inset-0 flex flex-col items-center justify-center text-gray-400 bg-panel z-20 transition-opacity">
+                                <i class="fa-solid fa-circle-notch fa-spin text-3xl text-accent mb-3"></i>
+                                <span>Mengambil data dari Google Sheets...</span>
+                            </div>
+                            
+                            <table class="w-full text-left border-collapse text-sm text-gray-300" id="orin-table">
+                                <thead class="bg-[#121214] text-white sticky top-0 z-30 shadow-md">
+                                    <tr id="orin-thead"></tr>
+                                </thead>
+                                <tbody id="orin-tbody" class="divide-y divide-white/5">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination Footer -->
+                        <div class="px-4 py-2 border-t border-white/10 flex justify-between items-center bg-[#121214]/50 shrink-0">
+                            <div id="orin-page-info" class="text-xs md:text-sm text-gray-400">Halaman 1 dari 1</div>
+                            <div class="flex gap-2">
+                                <button onclick="changeOrinPage(-1)" id="btn-orin-prev" class="btn-pagination px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded border border-white/10 text-white text-xs transition disabled:opacity-30 disabled:cursor-not-allowed">Mundur</button>
+                                <button onclick="changeOrinPage(1)" id="btn-orin-next" class="btn-pagination px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded border border-white/10 text-white text-xs transition disabled:opacity-30 disabled:cursor-not-allowed">Maju</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAYER 3: SPREADSHEETS ONLINE DYNAMIC -->
+                <div id="view-excel" class="view-layer flex flex-col bg-white">
+                    <div class="px-4 md:px-6 py-3 md:py-4 flex justify-between items-center bg-panel border-b border-white/10 shrink-0 gap-2 overflow-x-auto custom-scrollbar-left">
+                        <div class="flex items-center gap-3 min-w-0 pr-4">
+                            <div id="excel-icon-box" class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 shrink-0"><i id="excel-icon" class="fa-solid fa-box text-base md:text-lg"></i></div>
                             <div class="truncate">
                                 <h2 id="excel-title" class="text-base md:text-lg font-bold text-white leading-tight truncate">Nama Report</h2>
                                 <p class="text-[10px] md:text-xs text-textDim truncate">Spreadsheet Integration</p>
                             </div>
                         </div>
                         <div class="flex gap-2 shrink-0">
-                            <button onclick="toggleRightPanel()" class="flex px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition items-center justify-center gap-2">
-                                <i class="fa-solid fa-list-ul"></i> <span class="hidden sm:inline">Menu</span>
-                            </button>
-                            <a id="excel-btn-fullscreen" href="#" target="_blank" class="px-3 py-2 md:px-4 md:py-2 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center gap-2">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden sm:inline">Full</span>
-                            </a>
-                            <a id="excel-btn-download" href="#" class="px-3 py-2 md:px-4 md:py-2 rounded-lg md:rounded-xl bg-accent hover:bg-accent/80 text-dark font-bold text-sm transition flex items-center gap-2 shadow-[0_0_15px_rgba(74,222,128,0.3)]">
-                                <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">Unduh</span>
-                            </a>
+                            <button onclick="refreshIframe('excel-iframe', this)" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center justify-center gap-2"><i class="fa-solid fa-arrows-rotate transition-transform duration-500"></i> <span class="hidden sm:inline">Refresh</span></button>
+                            <button onclick="toggleRightPanel()" class="flex px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition items-center justify-center gap-2"><i class="fa-solid fa-list-ul"></i> <span class="hidden sm:inline">Menu</span></button>
+                            <a id="excel-btn-fullscreen" href="#" target="_blank" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center gap-2"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden sm:inline">Full</span></a>
+                            <a id="excel-btn-download" href="#" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-accent hover:bg-accent/80 text-dark font-bold text-sm transition flex items-center gap-2 shadow-[0_0_15px_rgba(74,222,128,0.3)]"><i class="fa-solid fa-download"></i> <span class="hidden sm:inline">Unduh</span></a>
                         </div>
                     </div>
-                    <!-- PENTING: Class overflow-hidden ditambahkan di container ini agar yang terpotong tidak keluar -->
-                    <div class="flex-1 w-full relative overflow-hidden bg-gray-100">
+                    <div class="flex-1 w-full relative min-h-0">
                         <iframe id="excel-iframe" src="" class="absolute inset-0 w-full h-full border-none"></iframe>
                     </div>
                 </div>
 
-                <!-- LAYER 3: TWIDY TOOLS (MENU 10) -->
+                <!-- LAYER 4: REKAP RO GRAMEDIA (MENU 5 - CUSTOM TABLE HTML/JS) -->
+                <div id="view-ro-table" class="view-layer custom-table-view flex flex-col bg-white">
+                    <!-- Top Actions Bar -->
+                    <div class="px-4 md:px-6 py-3 md:py-4 flex justify-between items-center bg-panel border-b border-white/10 shrink-0 gap-2 overflow-x-auto custom-scrollbar-left">
+                        <div class="flex items-center gap-3 min-w-0 pr-4">
+                            <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#6b2c4c]/20 flex items-center justify-center text-[#e87cb5] shrink-0">
+                                <i class="fa-solid fa-chart-column text-base md:text-lg"></i>
+                            </div>
+                            <div class="truncate">
+                                <h2 class="text-base md:text-lg font-bold text-white leading-tight truncate">Rekap RO Gramedia 2026</h2>
+                                <p class="text-[10px] md:text-xs text-textDim truncate">Custom Table Integration</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 shrink-0">
+                            <!-- TOMBOL REFRESH -->
+                            <button onclick="fetchROData(this)" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrows-rotate transition-transform duration-500"></i> <span class="hidden sm:inline">Refresh</span>
+                            </button>
+                            <button onclick="toggleRightPanel()" class="flex px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition items-center justify-center gap-2">
+                                <i class="fa-solid fa-list-ul"></i> <span class="hidden sm:inline">Menu</span>
+                            </button>
+                            <a href="https://docs.google.com/spreadsheets/d/1Vw6CZKFgtv6Hwci363vGrQE5ZihybodGzqAb5tas3gY/edit" target="_blank" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center gap-2">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden sm:inline">Full</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1Vw6CZKFgtv6Hwci363vGrQE5ZihybodGzqAb5tas3gY/export?format=xlsx" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-accent hover:bg-accent/80 text-dark font-bold text-sm transition flex items-center gap-2 shadow-[0_0_15px_rgba(74,222,128,0.3)]">
+                                <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">Unduh</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 w-full relative flex flex-col bg-panel min-h-0">
+                        <!-- Search & Status Bar dengan Smart Google-like Suggestions -->
+                        <div class="px-4 py-3 border-b border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3 shrink-0 relative">
+                            <div class="relative w-full sm:w-96 lg:w-[450px]">
+                                <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="ro-search" autocomplete="off" oninput="onGlobalSearchInput(event)" onkeydown="onGlobalSearchKeydown(event)" placeholder="Ketik apa saja (misal: garda, 1/10/26)..." class="w-full bg-[#121214] border border-white/10 text-white rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:border-accent transition text-sm">
+                                
+                                <!-- Container Dropdown Suggestions -->
+                                <div id="search-suggestions" class="suggestions-box absolute left-0 right-0 top-full mt-1 bg-[#1c1c1f] border border-white/20 rounded-lg shadow-2xl z-50 max-h-60 overflow-y-auto hidden custom-scrollbar"></div>
+                            </div>
+                            <div id="ro-count" class="text-xs md:text-sm text-textDim font-medium font-mono whitespace-nowrap">
+                                Menampilkan 0 dari 0 data
+                            </div>
+                        </div>
+
+                        <!-- Data Table Container -->
+                        <div class="flex-1 overflow-auto custom-scrollbar relative min-h-0" id="ro-table-container">
+                            <div id="ro-status" class="status-overlay absolute inset-0 flex flex-col items-center justify-center text-gray-400 bg-panel z-20 transition-opacity">
+                                <i class="fa-solid fa-circle-notch fa-spin text-3xl text-accent mb-3"></i>
+                                <span>Mengambil data dari Google Sheets...</span>
+                            </div>
+                            
+                            <table class="w-full text-left border-collapse text-sm text-gray-300" id="ro-table">
+                                <thead class="bg-[#121214] text-white sticky top-0 z-30 shadow-md">
+                                    <tr id="ro-thead"></tr>
+                                </thead>
+                                <tbody id="ro-tbody" class="divide-y divide-white/5">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination Footer -->
+                        <div class="px-4 py-2 border-t border-white/10 flex justify-between items-center bg-[#121214]/50 shrink-0">
+                            <div id="ro-page-info" class="text-xs md:text-sm text-gray-400">Halaman 1 dari 1</div>
+                            <div class="flex gap-2">
+                                <button onclick="changePage(-1)" id="btn-prev" class="btn-pagination px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded border border-white/10 text-white text-xs transition disabled:opacity-30 disabled:cursor-not-allowed">Mundur</button>
+                                <button onclick="changePage(1)" id="btn-next" class="btn-pagination px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded border border-white/10 text-white text-xs transition disabled:opacity-30 disabled:cursor-not-allowed">Maju</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAYER 5: TWIDY TOOLS (MENU 10) -->
                 <div id="view-twidytools" class="view-layer flex flex-col bg-white">
                     <div class="px-4 md:px-6 py-3 md:py-4 flex justify-between items-center bg-panel border-b border-white/10 shrink-0 gap-2">
                         <div class="flex items-center gap-3 min-w-0">
-                            <!-- Warna mengikuti palet sebelumnya -->
                             <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#6e2c33]/20 flex items-center justify-center text-[#e8707e] shrink-0">
                                 <i class="fa-solid fa-screwdriver-wrench text-base md:text-lg"></i>
                             </div>
@@ -432,18 +576,13 @@
                             </div>
                         </div>
                         <div class="flex gap-2 shrink-0">
-                            <!-- Tombol Menu -->
-                            <button onclick="toggleRightPanel()" class="flex px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition items-center justify-center gap-2">
-                                <i class="fa-solid fa-list-ul"></i> <span class="hidden sm:inline">Menu</span>
-                            </button>
-                            <a href="https://twidytools.my.id/" target="_blank" class="px-3 py-2 md:px-4 md:py-2 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center gap-2">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden sm:inline">Buka Tab</span>
-                            </a>
+                            <button onclick="refreshIframe('twidy-iframe', this)" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center justify-center gap-2"><i class="fa-solid fa-arrows-rotate transition-transform duration-500"></i> <span class="hidden sm:inline">Refresh</span></button>
+                            <button onclick="toggleRightPanel()" class="flex px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition items-center justify-center gap-2"><i class="fa-solid fa-list-ul"></i> <span class="hidden sm:inline">Menu</span></button>
+                            <a href="https://twidytools.my.id/" target="_blank" class="px-3 py-2 md:px-4 rounded-lg md:rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition flex items-center gap-2"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden sm:inline">Tab Baru</span></a>
                         </div>
                     </div>
-                    <div class="flex-1 w-full relative">
-                        <!-- Menampilkan IFRAME Twidy Tools -->
-                        <iframe src="https://twidytools.my.id/" class="absolute inset-0 w-full h-full border-none"></iframe>
+                    <div class="flex-1 w-full relative min-h-0">
+                        <iframe id="twidy-iframe" src="https://twidytools.my.id/" class="absolute inset-0 w-full h-full border-none"></iframe>
                     </div>
                 </div>
 
@@ -452,7 +591,6 @@
             <!-- RIGHT PANEL: 10 MENU DAFTAR LAPORAN -->
             <div id="right-panel" class="shrink-0 flex flex-col gap-2 overflow-y-auto pr-2 pb-6 custom-scrollbar">
                 
-                <!-- Header Laci (Hanya Tampil di HP) -->
                 <div class="lg:hidden flex justify-between items-center px-2 py-1 mb-2 border-b border-white/10">
                     <span class="font-bold text-white text-base">Menu Laporan</span>
                     <button onclick="toggleRightPanel()" class="w-8 h-8 flex items-center justify-center rounded-lg bg-white/10 text-white hover:bg-white/20 transition">
@@ -462,7 +600,7 @@
                 
                 <button id="right-btn-1" onclick="openMenu(1)" class="report-menu-btn w-full flex items-center gap-3 md:gap-4 p-2.5 md:p-3 rounded-xl md:rounded-2xl bg-panel/60">
                     <div class="w-10 h-10 rounded-xl bg-[#2b4c7e]/80 flex items-center justify-center text-[#7ba5e8] shrink-0"><i class="fa-solid fa-folder-open text-lg"></i></div>
-                    <span class="text-left font-semibold text-gray-300 text-xs md:text-[13px] leading-snug whitespace-nowrap">LOOKUP DATA OTOMATIS</span>
+                    <span class="text-left font-semibold text-gray-300 text-xs md:text-[13px] leading-snug whitespace-nowrap">GRAMEDIA SMART SYSTEM</span>
                 </button>
 
                 <button id="right-btn-2" onclick="openMenu(2)" class="report-menu-btn w-full flex items-center gap-3 md:gap-4 p-2.5 md:p-3 rounded-xl md:rounded-2xl bg-panel/60">
@@ -507,7 +645,6 @@
 
                 <div class="h-[1px] bg-white/10 my-1 mx-2"></div>
 
-                <!-- UPDATE NAMA KE TWIDY TOOLS -->
                 <button id="right-btn-10" onclick="openMenu(10)" class="report-menu-btn w-full flex items-center gap-3 md:gap-4 p-2.5 md:p-3 rounded-xl md:rounded-2xl bg-panel/60">
                     <div class="w-10 h-10 rounded-xl bg-[#6e2c33]/80 flex items-center justify-center text-[#e8707e] shrink-0"><i class="fa-solid fa-screwdriver-wrench text-lg"></i></div>
                     <span class="text-left font-semibold text-gray-300 text-xs md:text-[13px] leading-snug whitespace-nowrap">Twidy Tools</span>
@@ -522,14 +659,14 @@
             1: { type: 'lookup' }, 
             2: { 
                 title: "ID ORIN GRAMEDIA X KODE BSOFT", 
-                type: 'excel', 
-                link: "https://docs.google.com/file/d/1U2jYvdm-ZYXOSh2MQe04nQJXNkfOExIiFvmh8K-hNkM/edit?usp=drive_link", 
+                type: 'orin-table', 
+                link: "https://docs.google.com/spreadsheets/d/1U2jYvdm-ZYXOSh2MQe04nQJXNkfOExIiFvmh8K-hNkM/edit?", 
                 icon: "fa-address-book", iconBg: "bg-[#245e69]/20", iconColor: "text-[#5bc9d9]" 
             },
             3: { 
                 title: "Report Stock Status Gramedia (GAM)", 
                 type: 'excel', 
-                link: "https://docs.google.com/file/d/10HY1ZhTyixmWnqSKBTnbMWB8kBEf5l41/edit?usp=drive_link&ouid=115945256919821344075&rtpof=true&sd=true", 
+                link: "https://docs.google.com/file/d/10HY1ZhTyixmWnqSKBTnbMWB8kBEf5l41/edit?", 
                 icon: "fa-box", iconBg: "bg-orange-500/20", iconColor: "text-orange-400" 
             },
             4: { 
@@ -540,8 +677,8 @@
             },
             5: { 
                 title: "Rekap RO Gramedia 2026", 
-                type: 'excel', 
-                link: "https://docs.google.com/file/d/1jTx-8YH5WhmeJlSA6HWyegqP_sFNzp8c/edit?usp=drive_link&ouid=115945256919821344075&rtpof=true&sd=true", 
+                type: 'ro-table', 
+                link: "https://docs.google.com/spreadsheets/d/1Vw6CZKFgtv6Hwci363vGrQE5ZihybodGzqAb5tas3gY/edit?", 
                 icon: "fa-chart-column", iconBg: "bg-[#6b2c4c]/20", iconColor: "text-[#e87cb5]" 
             },
             6: { 
@@ -553,7 +690,7 @@
             7: { 
                 title: "DATA TOKO GRAMEDIA", 
                 type: 'excel', 
-                link: "https://docs.google.com/file/d/1prfqT2jfSNY5tTkO_xHdJSe-GJD9KydV/edit?usp=drive_link&ouid=115945256919821344075&rtpof=true&sd=true", 
+                link: "https://docs.google.com/spreadsheets/d/1prfqT2jfSNY5tTkO_xHdJSe-GJD9KydV/edit?", 
                 icon: "fa-building", iconBg: "bg-[#23587a]/20", iconColor: "text-[#61bde8]" 
             },
             8: { 
@@ -568,17 +705,1136 @@
                 link: "https://docs.google.com/file/d/1u3wxzQrxxgCoui_NAvVATe9Oxpd-RIOW/edit?usp=drive_link&ouid=115945256919821344075&rtpof=true&sd=true", 
                 icon: "fa-money-bill-wave", iconBg: "bg-[#1d6b41]/20", iconColor: "text-[#55e896]" 
             },
-            10: { type: 'twidy' } // Update Tipe Menu 10
+            10: { type: 'twidy' }
         };
 
-        // Initialize Panel state on load (Tampil jika layar PC)
+        // --- GLOBAL TOOLTIP SCRIPT ---
+        const tooltip = document.getElementById('global-tooltip');
+        function showTooltip(element, text) {
+            if (window.innerWidth < 768) return;
+            tooltip.innerText = text;
+            const rect = element.getBoundingClientRect();
+            tooltip.style.left = (rect.right + 12) + 'px';
+            tooltip.style.top = (rect.top + (rect.height / 2) - (tooltip.offsetHeight / 2)) + 'px';
+            tooltip.style.opacity = '1';
+        }
+        function hideTooltip() { tooltip.style.opacity = '0'; }
+
+        // --- FUNGSI REFRESH IFRAME ---
+        function refreshIframe(iframeId, btnElement) {
+            const iframe = document.getElementById(iframeId);
+            if (iframe) {
+                const currentSrc = iframe.src;
+                iframe.src = currentSrc;
+                const icon = btnElement.querySelector('i');
+                if (icon) {
+                    icon.classList.add('rotate-180');
+                    setTimeout(() => icon.classList.remove('rotate-180'), 500);
+                }
+            }
+        }
+
+        // Helper string escape & date parser
+        function escapeHTML(str) {
+            if (str === null || str === undefined) return '';
+            return str.toString()
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function isDateColumn(colName) {
+            const lower = colName.toLowerCase();
+            return lower.includes('date') || lower.includes('time') || lower.includes('tanggal');
+        }
+
+        function parseDateObj(valStr) {
+            if (!valStr) return null;
+            const parts = valStr.toString().split(' ');
+            const datePart = parts[0];
+            const dateSegments = datePart.split('/');
+            
+            if (dateSegments.length === 3) {
+                let m = parseInt(dateSegments[0], 10);
+                let d = parseInt(dateSegments[1], 10);
+                let y = parseInt(dateSegments[2], 10);
+                if (y < 100) y += 2000;
+                
+                const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                return {
+                    year: y.toString(),
+                    monthNum: m,
+                    monthName: monthNames[m - 1] || ("Bulan " + m),
+                    day: d,
+                    raw: valStr.toString()
+                };
+            }
+            return null;
+        }
+
+        function parseDateOrNumber(valStr) {
+            if (!valStr) return 0;
+            const parts = valStr.toString().split(' ');
+            const datePart = parts[0];
+            const timePart = parts[1] || '00:00';
+            const dateSegments = datePart.split('/');
+            
+            if (dateSegments.length === 3) {
+                let m = parseInt(dateSegments[0], 10);
+                let d = parseInt(dateSegments[1], 10);
+                let y = parseInt(dateSegments[2], 10);
+                if (y < 100) y += 2000;
+
+                const timeSegments = timePart.split(':');
+                let h = parseInt(timeSegments[0], 10) || 0;
+                let min = parseInt(timeSegments[1], 10) || 0;
+
+                return new Date(y, m - 1, d, h, min).getTime();
+            }
+
+            let num = parseFloat(valStr);
+            if (!isNaN(num)) return num;
+
+            return valStr.toString().toLowerCase();
+        }
+
+        function toggleSubTree(btn) {
+            const subtree = btn.closest('div').nextElementSibling;
+            const icon = btn.querySelector('i');
+            if (subtree.classList.contains('hidden')) {
+                subtree.classList.remove('hidden');
+                subtree.classList.add('flex');
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                subtree.classList.add('hidden');
+                subtree.classList.remove('flex');
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+
+        function toggleYearGroup(chk) {
+            const groupDiv = chk.closest('div').parentElement;
+            const subBoxes = groupDiv.querySelectorAll('input[type="checkbox"]');
+            subBoxes.forEach(b => b.checked = chk.checked);
+        }
+
+        function toggleMonthGroup(chk) {
+            const groupDiv = chk.closest('div').parentElement;
+            const subBoxes = groupDiv.querySelectorAll('.excel-chk-leaf');
+            subBoxes.forEach(b => b.checked = chk.checked);
+        }
+
+        function closeAllExcelDropdowns() {
+            const popup = document.getElementById('excel-filter-popup');
+            if (popup) popup.remove();
+            activeDropdownIndex = null;
+            activeOrinDropdownIndex = null;
+        }
+
+        document.addEventListener('click', function(e) {
+            const popup = document.getElementById('excel-filter-popup');
+            if (popup && !popup.contains(e.target) && !e.target.closest('th')) {
+                closeAllExcelDropdowns();
+            }
+        });
+
+
+        // ==========================================
+        // LOGIKA MENU 2: ID ORIN GRAMEDIA X KODE BSOFT (CUSTOM TABLE)
+        // ==========================================
+        let orinDataAll = [];
+        let orinFilteredData = [];
+        let orinColumns = [];
+        let isOrinLoaded = false;
+        let currentOrinPage = 1;
+        const orinRowsPerPage = 100;
+        let orinColumnCheckFilters = {};
+        let currentOrinSort = { colIndex: null, direction: null };
+        let activeOrinDropdownIndex = null;
+        let selectedOrinSuggestionIndex = -1;
+
+        async function fetchORINData(btnElement = null) {
+            const statusEl = document.getElementById('orin-status');
+            const tbody = document.getElementById('orin-tbody');
+            const thead = document.getElementById('orin-thead');
+            
+            if (btnElement) {
+                const icon = btnElement.querySelector('i');
+                if (icon) {
+                    icon.classList.add('rotate-180');
+                    setTimeout(() => icon.classList.remove('rotate-180'), 500);
+                }
+            }
+
+            statusEl.style.display = 'flex';
+            statusEl.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-3xl text-accent mb-3"></i><span class="text-sm">Mengambil data dari Google Sheets...</span>';
+            tbody.innerHTML = '';
+            thead.innerHTML = '';
+            document.getElementById('orin-search').value = ''; 
+            orinColumnCheckFilters = {};
+            currentOrinSort = { colIndex: null, direction: null };
+            closeAllExcelDropdowns();
+
+            const sheetId = '1U2jYvdm-ZYXOSh2MQe04nQJXNkfOExIiFvmh8K-hNkM';
+            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
+
+            try {
+                const response = await fetch(url);
+                const text = await response.text();
+                const jsonMatch = text.match(/google\.visualization\.Query\.setResponse\(([\s\S\w]+)\);/);
+                
+                if (!jsonMatch) throw new Error('Format respon tidak valid.');
+                
+                const data = JSON.parse(jsonMatch[1]);
+                if (data.status === 'error') throw new Error(data.errors[0].message || 'Gagal mengakses data.');
+
+                const table = data.table;
+                
+                // FILTER: Hanya ambil kolom yang benar-benar memiliki label/judul (Bukan string kosong)
+                let validColIndices = [];
+                orinColumns = [];
+                
+                table.cols.forEach((c, i) => {
+                    if (c && c.label && c.label.trim() !== '') {
+                        validColIndices.push(i);
+                        orinColumns.push(c.label.trim());
+                    }
+                });
+                
+                orinDataAll = table.rows.map(row => {
+                    let rowData = {};
+                    validColIndices.forEach((originalIndex, arrayIndex) => {
+                        const cell = row.c[originalIndex];
+                        const colLabel = orinColumns[arrayIndex];
+                        const val = cell ? (cell.f !== undefined ? cell.f : (cell.v !== null ? cell.v : '')) : '';
+                        rowData[colLabel] = val;
+                    });
+                    return rowData;
+                });
+
+                orinFilteredData = [...orinDataAll];
+                currentOrinPage = 1;
+                isOrinLoaded = true;
+                statusEl.style.display = 'none';
+                
+                renderORINHeaders();
+                renderOrinTablePage();
+                
+            } catch (error) {
+                statusEl.innerHTML = `<div class="text-center text-red-400 bg-red-400/10 p-4 rounded-xl border border-red-400/20"><i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i><br><span class="font-bold">Gagal memuat data.</span><br><small class="text-gray-400">${error.message}</small></div>`;
+            }
+        }
+
+        function renderORINHeaders() {
+            const thead = document.getElementById('orin-thead');
+            let headerHTML = '';
+            
+            orinColumns.forEach((col, i) => {
+                const isFiltered = orinColumnCheckFilters[i] !== undefined;
+                const isSorted = currentOrinSort.colIndex === i;
+                let sortIcon = '<i class="fa-solid fa-sort text-gray-400 text-xs ml-1"></i>';
+                if (isSorted) {
+                    sortIcon = currentOrinSort.direction === 'asc' 
+                        ? '<i class="fa-solid fa-sort-up text-accent text-xs ml-1"></i>' 
+                        : '<i class="fa-solid fa-sort-down text-accent text-xs ml-1"></i>';
+                }
+                const filterBadge = isFiltered ? '<span class="w-2 h-2 rounded-full bg-accent inline-block ml-1"></span>' : '';
+
+                headerHTML += `
+                <th class="px-4 py-3 font-semibold border-b border-white/10 whitespace-nowrap relative select-none bg-panel">
+                    <div class="flex items-center justify-between gap-2 cursor-pointer group" onclick="toggleOrinExcelDropdown(event, ${i})">
+                        <div class="flex items-center gap-1 truncate">
+                            <span class="text-white font-medium">${escapeHTML(col)}</span>
+                            ${filterBadge}
+                        </div>
+                        <div class="flex items-center text-gray-400 group-hover:text-white">
+                            ${sortIcon}
+                            <i class="fa-solid fa-caret-down text-xs ml-1"></i>
+                        </div>
+                    </div>
+                </th>`;
+            });
+            thead.innerHTML = headerHTML;
+        }
+
+        function toggleOrinExcelDropdown(event, colIndex) {
+            event.stopPropagation();
+            const existingPopup = document.getElementById('excel-filter-popup');
+            
+            if (existingPopup && activeOrinDropdownIndex === colIndex) {
+                closeAllExcelDropdowns();
+                return;
+            }
+            
+            closeAllExcelDropdowns();
+            activeOrinDropdownIndex = colIndex;
+
+            const th = event.currentTarget.closest('th');
+            const rect = th.getBoundingClientRect();
+            const colName = orinColumns[colIndex];
+            const isDateCol = isDateColumn(colName);
+
+            const popup = document.createElement('div');
+            popup.id = 'excel-filter-popup';
+            popup.className = 'excel-dropdown-menu fixed z-50 w-72 rounded-xl p-3 shadow-2xl text-xs flex flex-col gap-2.5';
+            
+            popup.style.top = (rect.bottom + 4) + 'px';
+            popup.style.left = Math.min(rect.left, window.innerWidth - 300) + 'px';
+
+            const currentAllowed = orinColumnCheckFilters[colIndex];
+
+            let listContentHTML = '';
+
+            if (isDateCol) {
+                let tree = {};
+                orinDataAll.forEach(row => {
+                    const val = row[colName];
+                    const dObj = parseDateObj(val);
+                    const valStr = val !== null && val !== undefined ? val.toString() : '';
+                    if (valStr === '') return;
+
+                    if (dObj) {
+                        if (!tree[dObj.year]) tree[dObj.year] = {};
+                        if (!tree[dObj.year][dObj.monthName]) tree[dObj.year][dObj.monthName] = [];
+                        if (!tree[dObj.year][dObj.monthName].includes(valStr)) {
+                            tree[dObj.year][dObj.monthName].push(valStr);
+                        }
+                    }
+                });
+
+                for (let year in tree) {
+                    let yearChecked = currentAllowed === undefined || Object.values(tree[year]).some(months => months.some(v => currentAllowed.has(v)));
+                    listContentHTML += `
+                    <div class="flex flex-col gap-1 my-1">
+                        <div class="flex items-center gap-2 font-bold px-1 text-white">
+                            <input type="checkbox" class="excel-chk-year rounded bg-[#121214] border-white/20 text-accent focus:ring-0 w-3.5 h-3.5" onchange="toggleYearGroup(this)" ${yearChecked ? 'checked' : ''}>
+                            <span>${year}</span>
+                        </div>`;
+                    
+                    for (let month in tree[year]) {
+                        let monthChecked = currentAllowed === undefined || tree[year][month].some(v => currentAllowed.has(v));
+                        listContentHTML += `
+                        <div class="flex flex-col gap-0.5 ml-4 my-1">
+                            <div class="flex items-center justify-between px-1 text-gray-300 font-semibold hover:bg-white/5 rounded py-0.5">
+                                <label class="flex items-center gap-2 cursor-pointer truncate">
+                                    <input type="checkbox" class="excel-chk-month rounded bg-[#121214] border-white/20 text-accent focus:ring-0 w-3.5 h-3.5" onchange="toggleMonthGroup(this)" ${monthChecked ? 'checked' : ''}>
+                                    <span>${month}</span>
+                                </label>
+                                <button type="button" onclick="toggleSubTree(this)" class="text-gray-400 hover:text-white px-1.5 py-0.5"><i class="fa-solid fa-plus text-[10px]"></i></button>
+                            </div>
+                            <div class="tree-subtree hidden flex-col gap-0.5 ml-5 mt-1 border-l border-white/10 pl-2">`;
+                        
+                        tree[year][month].forEach(valStr => {
+                            let isChecked = currentAllowed === undefined || currentAllowed.has(valStr);
+                            listContentHTML += `
+                            <label class="excel-chk-label flex items-center gap-2 px-2 py-1 hover:bg-white/10 rounded cursor-pointer truncate" data-val="${escapeHTML(valStr)}">
+                                <input type="checkbox" value="${escapeHTML(valStr)}" ${isChecked ? 'checked' : ''} class="excel-chk-leaf excel-chk rounded bg-[#121214] border-white/20 text-accent focus:ring-0 w-3.5 h-3.5 shrink-0">
+                                <span class="truncate text-gray-400" title="${escapeHTML(valStr)}">${escapeHTML(valStr)}</span>
+                            </label>`;
+                        });
+                        listContentHTML += `</div></div>`;
+                    }
+                    listContentHTML += `</div>`;
+                }
+            } else {
+                let uniqueValues = [...new Set(orinDataAll.map(row => row[colName]))].sort();
+                uniqueValues.forEach((val) => {
+                    const valStr = val !== null && val !== undefined ? val.toString() : '';
+                    const isChecked = currentAllowed === undefined || currentAllowed.has(valStr);
+                    listContentHTML += `
+                    <label class="excel-chk-label flex items-center gap-2 px-2 py-1.5 hover:bg-white/10 rounded cursor-pointer truncate" data-val="${escapeHTML(valStr)}">
+                        <input type="checkbox" value="${escapeHTML(valStr)}" ${isChecked ? 'checked' : ''} class="excel-chk rounded bg-[#121214] border-white/20 text-accent focus:ring-0 w-3.5 h-3.5 shrink-0">
+                        <span class="truncate" title="${escapeHTML(valStr)}">${valStr === '' ? '(Kosong)' : escapeHTML(valStr)}</span>
+                    </label>`;
+                });
+            }
+
+            popup.innerHTML = `
+                <div class="flex flex-col gap-1 pb-2 border-b excel-divider">
+                    <button onclick="applyOrinSort(${colIndex}, 'asc')" class="excel-menu-item flex items-center gap-2 px-2 py-1.5 rounded text-left transition"><i class="fa-solid fa-arrow-down-a-z w-4 text-center"></i> Sort A to Z / Terlama</button>
+                    <button onclick="applyOrinSort(${colIndex}, 'desc')" class="excel-menu-item flex items-center gap-2 px-2 py-1.5 rounded text-left transition"><i class="fa-solid fa-arrow-up-z-a w-4 text-center"></i> Sort Z to A / Terbaru</button>
+                </div>
+
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                    <input type="text" id="excel-popup-search" oninput="filterPopupCheckboxes(this.value)" placeholder="Cari nilai..." class="w-full bg-[#121214] border border-white/20 rounded pl-7 pr-2 py-1.5 text-xs text-white focus:outline-none focus:border-accent">
+                </div>
+
+                <div class="flex justify-between items-center px-1 text-[11px] text-gray-400">
+                    <button onclick="toggleSelectAllCheckboxes(true)" class="hover:text-accent underline">Pilih Semua</button>
+                    <button onclick="toggleSelectAllCheckboxes(false)" class="hover:text-accent underline">Hapus Semua</button>
+                </div>
+
+                <div id="excel-checkbox-list" class="excel-chk-container max-h-52 overflow-y-auto custom-scrollbar flex flex-col gap-0.5 border border-white/10 rounded p-1.5 bg-black/20">
+                    ${listContentHTML}
+                </div>
+
+                <div class="flex gap-2 pt-1">
+                    <button onclick="applyOrinExcelFilter(${colIndex})" class="flex-1 bg-accent text-dark font-bold py-1.5 rounded transition hover:opacity-90">Terapkan</button>
+                    <button onclick="clearOrinExcelFilter(${colIndex})" class="px-3 bg-white/10 hover:bg-white/20 py-1.5 rounded transition">Reset</button>
+                </div>
+            `;
+
+            document.body.appendChild(popup);
+        }
+
+        function filterPopupCheckboxes(keyword) {
+            const listContainer = document.getElementById('excel-checkbox-list');
+            const labels = listContainer.getElementsByClassName('excel-chk-label');
+            const q = keyword.toLowerCase();
+            for (let lbl of labels) {
+                const text = lbl.getAttribute('data-val').toLowerCase();
+                if (text.includes(q)) {
+                    lbl.style.display = 'flex';
+                    let subtree = lbl.closest('.tree-subtree');
+                    if (subtree) {
+                        subtree.classList.remove('hidden');
+                        subtree.classList.add('flex');
+                        let btnIcon = subtree.previousElementSibling.querySelector('i');
+                        if (btnIcon) { btnIcon.classList.remove('fa-plus'); btnIcon.classList.add('fa-minus'); }
+                    }
+                } else {
+                    lbl.style.display = 'none';
+                }
+            }
+        }
+
+        function toggleSelectAllCheckboxes(checkState) {
+            const listContainer = document.getElementById('excel-checkbox-list');
+            const checkboxes = listContainer.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(chk => chk.checked = checkState);
+        }
+
+        function applyOrinExcelFilter(colIndex) {
+            const listContainer = document.getElementById('excel-checkbox-list');
+            const checkboxes = listContainer.getElementsByClassName('excel-chk');
+            
+            let allowedSet = new Set();
+            let totalChecked = 0;
+            let totalBoxes = 0;
+
+            for (let chk of checkboxes) {
+                totalBoxes++;
+                if (chk.checked) {
+                    allowedSet.add(chk.value);
+                    totalChecked++;
+                }
+            }
+
+            const colName = orinColumns[colIndex];
+            const uniqueValuesCount = new Set(orinDataAll.map(row => row[colName])).size;
+
+            if (totalChecked === totalBoxes || totalChecked === 0) {
+                delete orinColumnCheckFilters[colIndex];
+            } else {
+                orinColumnCheckFilters[colIndex] = allowedSet;
+            }
+
+            closeAllExcelDropdowns();
+            applyOrinFiltersAndSort();
+            renderORINHeaders();
+        }
+
+        function clearOrinExcelFilter(colIndex) {
+            delete orinColumnCheckFilters[colIndex];
+            closeAllExcelDropdowns();
+            applyOrinFiltersAndSort();
+            renderORINHeaders();
+        }
+
+        function applyOrinSort(colIndex, direction) {
+            currentOrinSort = { colIndex, direction };
+            closeAllExcelDropdowns();
+            applyOrinFiltersAndSort();
+            renderORINHeaders();
+        }
+
+        function applyOrinFiltersAndSort() {
+            const globalQuery = document.getElementById('orin-search').value.toLowerCase();
+            
+            orinFilteredData = orinDataAll.filter(row => {
+                if (globalQuery) {
+                    const matchGlobal = Object.values(row).some(val => val.toString().toLowerCase().includes(globalQuery));
+                    if (!matchGlobal) return false;
+                }
+
+                for (const colIdxStr in orinColumnCheckFilters) {
+                    const idx = parseInt(colIdxStr);
+                    const colName = orinColumns[idx];
+                    const allowedSet = orinColumnCheckFilters[idx];
+                    const cellVal = row[colName] !== null && row[colName] !== undefined ? row[colName].toString() : '';
+                    
+                    if (!allowedSet.has(cellVal)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+            if (currentOrinSort.colIndex !== null && currentOrinSort.direction !== null) {
+                const colName = orinColumns[currentOrinSort.colIndex];
+                const dir = currentOrinSort.direction;
+
+                orinFilteredData.sort((a, b) => {
+                    let valA = a[colName] !== null && a[colName] !== undefined ? a[colName].toString() : '';
+                    let valB = b[colName] !== null && b[colName] !== undefined ? b[colName].toString() : '';
+
+                    let parsedA = parseDateOrNumber(valA);
+                    let parsedB = parseDateOrNumber(valB);
+
+                    if (typeof parsedA === 'number' && typeof parsedB === 'number') {
+                        return dir === 'asc' ? parsedA - parsedB : parsedB - parsedA;
+                    }
+
+                    return dir === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                });
+            }
+
+            currentOrinPage = 1;
+            renderOrinTablePage();
+        }
+
+        function renderOrinTablePage() {
+            const tbody = document.getElementById('orin-tbody');
+            const countEl = document.getElementById('orin-count');
+            const pageInfo = document.getElementById('orin-page-info');
+            const btnPrev = document.getElementById('btn-orin-prev');
+            const btnNext = document.getElementById('btn-orin-next');
+            
+            const totalItems = orinFilteredData.length;
+            const totalPages = Math.ceil(totalItems / orinRowsPerPage) || 1;
+            
+            if (currentOrinPage > totalPages) currentOrinPage = totalPages;
+            if (currentOrinPage < 1) currentOrinPage = 1;
+
+            const startIndex = (currentOrinPage - 1) * orinRowsPerPage;
+            const endIndex = Math.min(startIndex + orinRowsPerPage, totalItems);
+            const pageData = orinFilteredData.slice(startIndex, endIndex);
+
+            if(totalItems === 0) {
+                tbody.innerHTML = `<tr><td colspan="${orinColumns.length}" class="text-center py-10 text-gray-500 font-medium"><i class="fa-solid fa-magnifying-glass mb-2 text-xl"></i><br>Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
+            } else {
+                tbody.innerHTML = pageData.map(row => {
+                    return `<tr class="hover:bg-white/5 transition duration-150">` + 
+                        orinColumns.map(col => `<td class="px-4 py-2.5 whitespace-nowrap border-b border-white/5">${escapeHTML(row[col])}</td>`).join('') + 
+                        `</tr>`;
+                }).join('');
+            }
+            
+            countEl.innerText = totalItems === 0 ? `Menampilkan 0 data` : `Menampilkan ${startIndex + 1}-${endIndex} dari ${totalItems.toLocaleString('id-ID')} data`;
+            pageInfo.innerText = `Halaman ${currentOrinPage} dari ${totalPages}`;
+            
+            btnPrev.disabled = currentOrinPage === 1;
+            btnNext.disabled = currentOrinPage === totalPages;
+        }
+
+        function changeOrinPage(direction) {
+            currentOrinPage += direction;
+            renderOrinTablePage();
+            document.getElementById('orin-table-container').scrollTop = 0;
+        }
+
+        function onOrinGlobalSearchInput(event) {
+            const query = event.target.value.toLowerCase().trim();
+            const suggestionsBox = document.getElementById('orin-search-suggestions');
+            
+            applyOrinFiltersAndSort(); 
+
+            if (!query || query.length < 2) {
+                hideOrinSuggestions();
+                return;
+            }
+
+            let matches = new Set();
+            orinDataAll.forEach(row => {
+                Object.values(row).forEach(val => {
+                    if (val !== null && val !== undefined) {
+                        let strVal = val.toString();
+                        if (strVal.toLowerCase().includes(query)) {
+                            matches.add(strVal);
+                        }
+                    }
+                });
+            });
+
+            let suggestions = Array.from(matches).slice(0, 8);
+
+            if (suggestions.length === 0) {
+                hideOrinSuggestions();
+                return;
+            }
+
+            selectedOrinSuggestionIndex = -1;
+            suggestionsBox.innerHTML = suggestions.map((sug, idx) => 
+                `<div onclick="selectOrinSuggestion('${escapeHTML(sug).replace(/'/g, "\\'")}')" class="suggestion-item px-4 py-2 text-xs text-gray-200 hover:bg-white/10 cursor-pointer border-b border-white/5 last:border-none truncate" data-index="${idx}">
+                    <i class="fa-solid fa-magnifying-glass mr-2 text-gray-400"></i>${escapeHTML(sug)}
+                </div>`
+            ).join('');
+            
+            suggestionsBox.classList.remove('hidden');
+        }
+
+        function hideOrinSuggestions() {
+            const suggestionsBox = document.getElementById('orin-search-suggestions');
+            suggestionsBox.classList.add('hidden');
+            suggestionsBox.innerHTML = '';
+            selectedOrinSuggestionIndex = -1;
+        }
+
+        function selectOrinSuggestion(value) {
+            document.getElementById('orin-search').value = value;
+            hideOrinSuggestions();
+            applyOrinFiltersAndSort();
+        }
+
+        function onOrinGlobalSearchKeydown(event) {
+            const suggestionsBox = document.getElementById('orin-search-suggestions');
+            const items = suggestionsBox.getElementsByClassName('suggestion-item');
+            
+            if (suggestionsBox.classList.contains('hidden') || items.length === 0) return;
+
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                selectedOrinSuggestionIndex = (selectedOrinSuggestionIndex + 1) % items.length;
+                updateActiveOrinSuggestion(items);
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                selectedOrinSuggestionIndex = (selectedOrinSuggestionIndex - 1 + items.length) % items.length;
+                updateActiveOrinSuggestion(items);
+            } else if (event.key === 'Enter') {
+                if (selectedOrinSuggestionIndex >= 0 && selectedOrinSuggestionIndex < items.length) {
+                    event.preventDefault();
+                    items[selectedOrinSuggestionIndex].click();
+                } else {
+                    hideOrinSuggestions();
+                }
+            } else if (event.key === 'Escape') {
+                hideOrinSuggestions();
+            }
+        }
+
+        function updateActiveOrinSuggestion(items) {
+            for (let i = 0; i < items.length; i++) {
+                if (i === selectedOrinSuggestionIndex) {
+                    items[i].classList.add('bg-white/20', 'active-suggestion');
+                    items[i].scrollIntoView({ block: 'nearest' });
+                } else {
+                    items[i].classList.remove('bg-white/20', 'active-suggestion');
+                }
+            }
+        }
+
+
+        // ==========================================
+        // LOGIKA MENU 5: REKAP RO GRAMEDIA 2026 (CUSTOM TABLE)
+        // ==========================================
+        let roDataAll = []; 
+        let roFilteredData = [];
+        let roColumns = []; 
+        let isRoLoaded = false;
+        let currentPage = 1;
+        const rowsPerPage = 100;
+        let columnCheckFilters = {}; 
+        let currentSort = { colIndex: null, direction: null }; 
+        let activeDropdownIndex = null; 
+
+        const desiredColumnOrder = [
+            "Consignment replenishment order",
+            "Warehouse",
+            "Name2",
+            "Created date and time",
+            "Status",
+            "Expired date",
+            "Item number",
+            "Product name",
+            "Quantity",
+            "Sug. Retail price",
+            "Disc %",
+            "Price (Exclude)",
+            "Amount (Exclude)",
+            "Receipt amount",
+            "Confirmed quantity",
+            "Deliver remainder",
+            "Received",
+            "Receipt date"
+        ];
+
+        async function fetchROData(btnElement = null) {
+            const statusEl = document.getElementById('ro-status');
+            const tbody = document.getElementById('ro-tbody');
+            const thead = document.getElementById('ro-thead');
+            
+            if (btnElement) {
+                const icon = btnElement.querySelector('i');
+                if (icon) {
+                    icon.classList.add('rotate-180');
+                    setTimeout(() => icon.classList.remove('rotate-180'), 500);
+                }
+            }
+
+            statusEl.style.display = 'flex';
+            statusEl.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-3xl text-accent mb-3"></i><span class="text-sm">Mengambil data dari Google Sheets...</span>';
+            tbody.innerHTML = '';
+            thead.innerHTML = '';
+            document.getElementById('ro-search').value = ''; 
+            columnCheckFilters = {};
+            currentSort = { colIndex: null, direction: null };
+            closeAllExcelDropdowns();
+
+            const sheetId = '1Vw6CZKFgtv6Hwci363vGrQE5ZihybodGzqAb5tas3gY';
+            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
+
+            try {
+                const response = await fetch(url);
+                const text = await response.text();
+                const jsonMatch = text.match(/google\.visualization\.Query\.setResponse\(([\s\S\w]+)\);/);
+                
+                if (!jsonMatch) throw new Error('Format respon tidak valid.');
+                
+                const data = JSON.parse(jsonMatch[1]);
+                if (data.status === 'error') throw new Error(data.errors[0].message || 'Gagal mengakses data.');
+
+                const table = data.table;
+                const rawColumns = table.cols.map((c, i) => (c && c.label) ? c.label.trim() : 'Kolom ' + (i+1));
+                
+                roColumns = [];
+                desiredColumnOrder.forEach(targetCol => {
+                    const found = rawColumns.find(rc => rc.toLowerCase() === targetCol.toLowerCase());
+                    if (found && !roColumns.includes(found)) {
+                        roColumns.push(found);
+                    }
+                });
+
+                desiredColumnOrder.forEach(targetCol => {
+                    const found = rawColumns.find(rc => rc.toLowerCase().includes(targetCol.toLowerCase()));
+                    if (found && !roColumns.includes(found)) {
+                        roColumns.push(found);
+                    }
+                });
+
+                const rawRowsData = table.rows.map(row => {
+                    let rowData = {};
+                    row.c.forEach((cell, i) => {
+                        const colLabel = rawColumns[i];
+                        if(colLabel) {
+                            const val = cell ? (cell.f !== undefined ? cell.f : (cell.v !== null ? cell.v : '')) : '';
+                            rowData[colLabel] = val;
+                        }
+                    });
+                    return rowData;
+                });
+
+                roDataAll = rawRowsData.map(row => {
+                    let newRow = {};
+                    roColumns.forEach(col => {
+                        newRow[col] = row[col] !== undefined ? row[col] : '';
+                    });
+                    return newRow;
+                });
+
+                roFilteredData = [...roDataAll];
+                currentPage = 1;
+                isRoLoaded = true;
+                statusEl.style.display = 'none';
+                
+                renderROHeaders();
+                renderTablePage();
+                
+            } catch (error) {
+                statusEl.innerHTML = `<div class="text-center text-red-400 bg-red-400/10 p-4 rounded-xl border border-red-400/20"><i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i><br><span class="font-bold">Gagal memuat data.</span><br><small class="text-gray-400">${error.message}</small></div>`;
+            }
+        }
+
+        function renderROHeaders() {
+            const thead = document.getElementById('ro-thead');
+            let headerHTML = '';
+            
+            roColumns.forEach((col, i) => {
+                const isFiltered = columnCheckFilters[i] !== undefined;
+                const isSorted = currentSort.colIndex === i;
+                let sortIcon = '<i class="fa-solid fa-sort text-gray-400 text-xs ml-1"></i>';
+                if (isSorted) {
+                    sortIcon = currentSort.direction === 'asc' 
+                        ? '<i class="fa-solid fa-sort-up text-accent text-xs ml-1"></i>' 
+                        : '<i class="fa-solid fa-sort-down text-accent text-xs ml-1"></i>';
+                }
+                const filterBadge = isFiltered ? '<span class="w-2 h-2 rounded-full bg-accent inline-block ml-1"></span>' : '';
+
+                headerHTML += `
+                <th class="px-4 py-3 font-semibold border-b border-white/10 whitespace-nowrap relative select-none bg-panel">
+                    <div class="flex items-center justify-between gap-2 cursor-pointer group" onclick="toggleExcelDropdown(event, ${i})">
+                        <div class="flex items-center gap-1 truncate">
+                            <span class="text-white font-medium">${escapeHTML(col)}</span>
+                            ${filterBadge}
+                        </div>
+                        <div class="flex items-center text-gray-400 group-hover:text-white">
+                            ${sortIcon}
+                            <i class="fa-solid fa-caret-down text-xs ml-1"></i>
+                        </div>
+                    </div>
+                </th>`;
+            });
+            thead.innerHTML = headerHTML;
+        }
+
+        function toggleExcelDropdown(event, colIndex) {
+            event.stopPropagation();
+            const existingPopup = document.getElementById('excel-filter-popup');
+            
+            if (existingPopup && activeDropdownIndex === colIndex) {
+                closeAllExcelDropdowns();
+                return;
+            }
+            
+            closeAllExcelDropdowns();
+            activeDropdownIndex = colIndex;
+
+            const th = event.currentTarget.closest('th');
+            const rect = th.getBoundingClientRect();
+            const colName = roColumns[colIndex];
+            const isDateCol = isDateColumn(colName);
+
+            const popup = document.createElement('div');
+            popup.id = 'excel-filter-popup';
+            popup.className = 'excel-dropdown-menu fixed z-50 w-72 rounded-xl p-3 shadow-2xl text-xs flex flex-col gap-2.5';
+            
+            popup.style.top = (rect.bottom + 4) + 'px';
+            popup.style.left = Math.min(rect.left, window.innerWidth - 300) + 'px';
+
+            const currentAllowed = columnCheckFilters[colIndex]; 
+
+            let listContentHTML = '';
+
+            if (isDateCol) {
+                let tree = {};
+                roDataAll.forEach(row => {
+                    const val = row[colName];
+                    const dObj = parseDateObj(val);
+                    const valStr = val !== null && val !== undefined ? val.toString() : '';
+                    if (valStr === '') return;
+
+                    if (dObj) {
+                        if (!tree[dObj.year]) tree[dObj.year] = {};
+                        if (!tree[dObj.year][dObj.monthName]) tree[dObj.year][dObj.monthName] = [];
+                        if (!tree[dObj.year][dObj.monthName].includes(valStr)) {
+                            tree[dObj.year][dObj.monthName].push(valStr);
+                        }
+                    }
+                });
+
+                for (let year in tree) {
+                    let yearChecked = currentAllowed === undefined || Object.values(tree[year]).some(months => months.some(v => currentAllowed.has(v)));
+                    listContentHTML += `
+                    <div class="flex flex-col gap-1 my-1">
+                        <div class="flex items-center gap-2 font-bold px-1 text-white">
+                            <input type="checkbox" class="excel-chk-year rounded bg-[#121214] border-white/20 text-accent focus:ring-0 w-3.5 h-3.5" onchange="toggleYearGroup(this)" ${yearChecked ? 'checked' : ''}>
+                            <span>${year}</span>
+                        </div>`;
+                    
+                    for (let month in tree[year]) {
+                        let monthChecked = currentAllowed === undefined || tree[year][month].some(v => currentAllowed.has(v));
+                        listContentHTML += `
+                        <div class="flex flex-col gap-0.5 ml-4 my-1">
+                            <div class="flex items-center justify-between px-1 text-gray-300 font-semibold hover:bg-white/5 rounded py-0.5">
+                                <label class="flex items-center gap-2 cursor-pointer truncate">
+                                    <input type="checkbox" class="excel-chk-month rounded bg-[#121214] border-white/20 text-accent focus:ring-0 w-3.5 h-3.5" onchange="toggleMonthGroup(this)" ${monthChecked ? 'checked' : ''}>
+                                    <span>${month}</span>
+                                </label>
+                                <button type="button" onclick="toggleSubTree(this)" class="text-gray-400 hover:text-white px-1.5 py-0.5"><i class="fa-solid fa-plus text-[10px]"></i></button>
+                            </div>
+                            <div class="tree-subtree hidden flex-col gap-0.5 ml-5 mt-1 border-l border-white/10 pl-2">`;
+                        
+                        tree[year][month].forEach(valStr => {
+                            let isChecked = currentAllowed === undefined || currentAllowed.has(valStr);
+                            listContentHTML += `
+                            <label class="excel-chk-label flex items-center gap-2 px-2 py-1 hover:bg-white/10 rounded cursor-pointer truncate" data-val="${escapeHTML(valStr)}">
+                                <input type="checkbox" value="${escapeHTML(valStr)}" ${isChecked ? 'checked' : ''} class="excel-chk-leaf excel-chk rounded bg-[#121214] border-white/20 text-accent focus:ring-0 w-3.5 h-3.5 shrink-0">
+                                <span class="truncate text-gray-400" title="${escapeHTML(valStr)}">${escapeHTML(valStr)}</span>
+                            </label>`;
+                        });
+                        listContentHTML += `</div></div>`;
+                    }
+                    listContentHTML += `</div>`;
+                }
+            } else {
+                let uniqueValues = [...new Set(roDataAll.map(row => row[colName]))].sort();
+                uniqueValues.forEach((val) => {
+                    const valStr = val !== null && val !== undefined ? val.toString() : '';
+                    const isChecked = currentAllowed === undefined || currentAllowed.has(valStr);
+                    listContentHTML += `
+                    <label class="excel-chk-label flex items-center gap-2 px-2 py-1.5 hover:bg-white/10 rounded cursor-pointer truncate" data-val="${escapeHTML(valStr)}">
+                        <input type="checkbox" value="${escapeHTML(valStr)}" ${isChecked ? 'checked' : ''} class="excel-chk rounded bg-[#121214] border-white/20 text-accent focus:ring-0 w-3.5 h-3.5 shrink-0">
+                        <span class="truncate" title="${escapeHTML(valStr)}">${valStr === '' ? '(Kosong)' : escapeHTML(valStr)}</span>
+                    </label>`;
+                });
+            }
+
+            popup.innerHTML = `
+                <div class="flex flex-col gap-1 pb-2 border-b excel-divider">
+                    <button onclick="applySort(${colIndex}, 'asc')" class="excel-menu-item flex items-center gap-2 px-2 py-1.5 rounded text-left transition"><i class="fa-solid fa-arrow-down-a-z w-4 text-center"></i> Sort A to Z / Terlama</button>
+                    <button onclick="applySort(${colIndex}, 'desc')" class="excel-menu-item flex items-center gap-2 px-2 py-1.5 rounded text-left transition"><i class="fa-solid fa-arrow-up-z-a w-4 text-center"></i> Sort Z to A / Terbaru</button>
+                </div>
+
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                    <input type="text" id="excel-popup-search" oninput="filterPopupCheckboxes(this.value)" placeholder="Cari nilai..." class="w-full bg-[#121214] border border-white/20 rounded pl-7 pr-2 py-1.5 text-xs text-white focus:outline-none focus:border-accent">
+                </div>
+
+                <div class="flex justify-between items-center px-1 text-[11px] text-gray-400">
+                    <button onclick="toggleSelectAllCheckboxes(true)" class="hover:text-accent underline">Pilih Semua</button>
+                    <button onclick="toggleSelectAllCheckboxes(false)" class="hover:text-accent underline">Hapus Semua</button>
+                </div>
+
+                <div id="excel-checkbox-list" class="excel-chk-container max-h-52 overflow-y-auto custom-scrollbar flex flex-col gap-0.5 border border-white/10 rounded p-1.5 bg-black/20">
+                    ${listContentHTML}
+                </div>
+
+                <div class="flex gap-2 pt-1">
+                    <button onclick="applyExcelFilter(${colIndex})" class="flex-1 bg-accent text-dark font-bold py-1.5 rounded transition hover:opacity-90">Terapkan</button>
+                    <button onclick="clearExcelFilter(${colIndex})" class="px-3 bg-white/10 hover:bg-white/20 py-1.5 rounded transition">Reset</button>
+                </div>
+            `;
+
+            document.body.appendChild(popup);
+        }
+
+        function applyExcelFilter(colIndex) {
+            const listContainer = document.getElementById('excel-checkbox-list');
+            const checkboxes = listContainer.getElementsByClassName('excel-chk');
+            
+            let allowedSet = new Set();
+            let totalChecked = 0;
+            let totalBoxes = 0;
+
+            for (let chk of checkboxes) {
+                totalBoxes++;
+                if (chk.checked) {
+                    allowedSet.add(chk.value);
+                    totalChecked++;
+                }
+            }
+
+            const colName = roColumns[colIndex];
+            const uniqueValuesCount = new Set(roDataAll.map(row => row[colName])).size;
+
+            if (totalChecked === totalBoxes || totalChecked === 0) {
+                delete columnCheckFilters[colIndex];
+            } else {
+                columnCheckFilters[colIndex] = allowedSet;
+            }
+
+            closeAllExcelDropdowns();
+            applyFiltersAndSort();
+            renderROHeaders();
+        }
+
+        function clearExcelFilter(colIndex) {
+            delete columnCheckFilters[colIndex];
+            closeAllExcelDropdowns();
+            applyFiltersAndSort();
+            renderROHeaders();
+        }
+
+        function applySort(colIndex, direction) {
+            currentSort = { colIndex, direction };
+            closeAllExcelDropdowns();
+            applyFiltersAndSort();
+            renderROHeaders();
+        }
+
+        function applyFiltersAndSort() {
+            const globalQuery = document.getElementById('ro-search').value.toLowerCase();
+            
+            roFilteredData = roDataAll.filter(row => {
+                if (globalQuery) {
+                    const matchGlobal = Object.values(row).some(val => val.toString().toLowerCase().includes(globalQuery));
+                    if (!matchGlobal) return false;
+                }
+
+                for (const colIdxStr in columnCheckFilters) {
+                    const idx = parseInt(colIdxStr);
+                    const colName = roColumns[idx];
+                    const allowedSet = columnCheckFilters[idx];
+                    const cellVal = row[colName] !== null && row[colName] !== undefined ? row[colName].toString() : '';
+                    
+                    if (!allowedSet.has(cellVal)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+            if (currentSort.colIndex !== null && currentSort.direction !== null) {
+                const colName = roColumns[currentSort.colIndex];
+                const dir = currentSort.direction;
+
+                roFilteredData.sort((a, b) => {
+                    let valA = a[colName] !== null && a[colName] !== undefined ? a[colName].toString() : '';
+                    let valB = b[colName] !== null && b[colName] !== undefined ? b[colName].toString() : '';
+
+                    let parsedA = parseDateOrNumber(valA);
+                    let parsedB = parseDateOrNumber(valB);
+
+                    if (typeof parsedA === 'number' && typeof parsedB === 'number') {
+                        return dir === 'asc' ? parsedA - parsedB : parsedB - parsedA;
+                    }
+
+                    return dir === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                });
+            }
+
+            currentPage = 1;
+            renderTablePage();
+        }
+
+        function renderTablePage() {
+            const tbody = document.getElementById('ro-tbody');
+            const countEl = document.getElementById('ro-count');
+            const pageInfo = document.getElementById('ro-page-info');
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            
+            const totalItems = roFilteredData.length;
+            const totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+            
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = Math.min(startIndex + rowsPerPage, totalItems);
+            const pageData = roFilteredData.slice(startIndex, endIndex);
+
+            if(totalItems === 0) {
+                tbody.innerHTML = `<tr><td colspan="${roColumns.length}" class="text-center py-10 text-gray-500 font-medium"><i class="fa-solid fa-magnifying-glass mb-2 text-xl"></i><br>Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
+            } else {
+                tbody.innerHTML = pageData.map(row => {
+                    return `<tr class="hover:bg-white/5 transition duration-150">` + 
+                        roColumns.map(col => `<td class="px-4 py-2.5 whitespace-nowrap border-b border-white/5">${escapeHTML(row[col])}</td>`).join('') + 
+                        `</tr>`;
+                }).join('');
+            }
+            
+            countEl.innerText = totalItems === 0 ? `Menampilkan 0 data` : `Menampilkan ${startIndex + 1}-${endIndex} dari ${totalItems.toLocaleString('id-ID')} data`;
+            pageInfo.innerText = `Halaman ${currentPage} dari ${totalPages}`;
+            
+            btnPrev.disabled = currentPage === 1;
+            btnNext.disabled = currentPage === totalPages;
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            renderTablePage();
+            document.getElementById('ro-table-container').scrollTop = 0;
+        }
+
+        let selectedSuggestionIndex = -1;
+
+        function onGlobalSearchInput(event) {
+            const query = event.target.value.toLowerCase().trim();
+            const suggestionsBox = document.getElementById('search-suggestions');
+            
+            applyFiltersAndSort(); 
+
+            if (!query || query.length < 2) {
+                hideSuggestions();
+                return;
+            }
+
+            let matches = new Set();
+            roDataAll.forEach(row => {
+                Object.values(row).forEach(val => {
+                    if (val !== null && val !== undefined) {
+                        let strVal = val.toString();
+                        if (strVal.toLowerCase().includes(query)) {
+                            matches.add(strVal);
+                        }
+                    }
+                });
+            });
+
+            let suggestions = Array.from(matches).slice(0, 8);
+
+            if (suggestions.length === 0) {
+                hideSuggestions();
+                return;
+            }
+
+            selectedSuggestionIndex = -1;
+            suggestionsBox.innerHTML = suggestions.map((sug, idx) => 
+                `<div onclick="selectSuggestion('${escapeHTML(sug).replace(/'/g, "\\'")}')" class="suggestion-item px-4 py-2 text-xs text-gray-200 hover:bg-white/10 cursor-pointer border-b border-white/5 last:border-none truncate" data-index="${idx}">
+                    <i class="fa-solid fa-magnifying-glass mr-2 text-gray-400"></i>${escapeHTML(sug)}
+                </div>`
+            ).join('');
+            
+            suggestionsBox.classList.remove('hidden');
+        }
+
+        function hideSuggestions() {
+            const suggestionsBox = document.getElementById('search-suggestions');
+            suggestionsBox.classList.add('hidden');
+            suggestionsBox.innerHTML = '';
+            selectedSuggestionIndex = -1;
+        }
+
+        function selectSuggestion(value) {
+            document.getElementById('ro-search').value = value;
+            hideSuggestions();
+            applyFiltersAndSort();
+        }
+
+        function onGlobalSearchKeydown(event) {
+            const suggestionsBox = document.getElementById('search-suggestions');
+            const items = suggestionsBox.getElementsByClassName('suggestion-item');
+            
+            if (suggestionsBox.classList.contains('hidden') || items.length === 0) return;
+
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                selectedSuggestionIndex = (selectedSuggestionIndex + 1) % items.length;
+                updateActiveSuggestion(items);
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                selectedSuggestionIndex = (selectedSuggestionIndex - 1 + items.length) % items.length;
+                updateActiveSuggestion(items);
+            } else if (event.key === 'Enter') {
+                if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < items.length) {
+                    event.preventDefault();
+                    items[selectedSuggestionIndex].click();
+                } else {
+                    hideSuggestions();
+                }
+            } else if (event.key === 'Escape') {
+                hideSuggestions();
+            }
+        }
+
+        function updateActiveSuggestion(items) {
+            for (let i = 0; i < items.length; i++) {
+                if (i === selectedSuggestionIndex) {
+                    items[i].classList.add('bg-white/20', 'active-suggestion');
+                    items[i].scrollIntoView({ block: 'nearest' });
+                } else {
+                    items[i].classList.remove('bg-white/20', 'active-suggestion');
+                }
+            }
+        }
+
+
+        // ==========================================
+        // SYSTEM INIT & NAVIGATION
+        // ==========================================
         if(window.innerWidth < 1024) {
             document.getElementById('right-panel').classList.add('hidden-panel');
         } else {
             document.getElementById('right-panel').classList.remove('hidden-panel');
         }
 
-        // Waktu Real Time
         function updateDateTime() {
             const now = new Date();
             document.getElementById('current-time').innerText = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
@@ -586,7 +1842,9 @@
         }
         setInterval(updateDateTime, 1000); updateDateTime();
 
-        let isDarkMode = true;
+        // Variabel tema SEKARANG di-set False (karena Light Mode adalah default)
+        let isDarkMode = false;
+        
         function toggleTheme() {
             const body = document.body;
             const themeIcon = document.getElementById('theme-icon');
@@ -594,10 +1852,12 @@
             isDarkMode = !isDarkMode;
             
             if (isDarkMode) {
+                // Hapus mode terang, ganti ikon ke Matahari (Sun) untuk opsi balik
                 body.classList.remove('light-mode');
                 themeIcon.classList.remove('fa-moon');
                 themeIcon.classList.add('fa-sun');
             } else {
+                // Balik ke mode terang, ganti ikon ke Bulan (Moon)
                 body.classList.add('light-mode');
                 themeIcon.classList.remove('fa-sun');
                 themeIcon.classList.add('fa-moon');
@@ -616,11 +1876,8 @@
             homeBtn.classList.add('text-gray-400');
         }
 
-        // --- FUNGSI MEMBUKA MENU ---
         function openMenu(index) {
             resetAllActiveStates();
-            
-            // Auto close panel saat menu dipilih
             document.getElementById('right-panel').classList.add('hidden-panel');
 
             const activeLeftBtn = document.getElementById('left-btn-' + index);
@@ -638,8 +1895,17 @@
             if (data.type === 'lookup') {
                 document.getElementById('view-lookup').classList.add('active');
             } else if (data.type === 'twidy') {
-                // Tampilkan Tampilan Twidy Tools
                 document.getElementById('view-twidytools').classList.add('active');
+            } else if (data.type === 'orin-table') {
+                document.getElementById('view-orin-table').classList.add('active');
+                if (!isOrinLoaded) {
+                    fetchORINData();
+                }
+            } else if (data.type === 'ro-table') {
+                document.getElementById('view-ro-table').classList.add('active');
+                if (!isRoLoaded) {
+                    fetchROData();
+                }
             } else if (data.type === 'excel') {
                 document.getElementById('view-excel').classList.add('active');
                 
@@ -647,51 +1913,35 @@
                 document.getElementById('excel-icon').className = "fa-solid " + data.icon + " text-base md:text-lg";
                 document.getElementById('excel-icon-box').className = "w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center shrink-0 " + data.iconBg + " " + data.iconColor;
                 
-                // Panggil Iframe dan reset class CSS-nya agar bersih dulu
-                let iframeEl = document.getElementById('excel-iframe');
-                iframeEl.className = "absolute inset-0 w-full h-full border-none";
-                
-                // LOGIKA BARU UNTUK GOOGLE SPREADSHEETS / GOOGLE DOCS
                 let baseLink = data.link;
                 let embedLink = baseLink;
                 let downloadLink = baseLink;
 
                 if (baseLink.includes("docs.google.com") || baseLink.includes("drive.google.com")) {
-                    // Mengubah link edit menjadi mode preview untuk ditaruh di Iframe
                     embedLink = baseLink.replace(/\/edit.*/, '/preview');
                     
-                    // Mengekstrak ID file
                     let idMatch = baseLink.match(/\/d\/([a-zA-Z0-9-_]+)/);
                     if (idMatch && idMatch[1]) {
                         if (baseLink.includes("/spreadsheets/d/")) {
-                            // 1. Jika link berupa Google Sheets asli (Native)
                             downloadLink = "https://docs.google.com/spreadsheets/d/" + idMatch[1] + "/export?format=xlsx";
                         } else {
-                            // 2. Jika link berupa File Excel biasa (/file/d/)
-                            // TERAPKAN HACK CSS DI SINI UNTUK MENYEMBUNYIKAN UI
-                            iframeEl.className = "border-none crop-drive-ui";
-                            
-                            // Endpoint download langsung
                             downloadLink = "https://drive.google.com/uc?export=download&id=" + idMatch[1];
                         }
                     }
                 } else {
-                    // Fallback jika dikembalikan memakai link OneDrive
                     embedLink = baseLink + "&action=embedview";
                     downloadLink = baseLink + "&download=1";
                 }
 
-                iframeEl.src = embedLink;
+                document.getElementById('excel-iframe').src = embedLink;
                 document.getElementById('excel-btn-fullscreen').href = baseLink;
                 document.getElementById('excel-btn-download').href = downloadLink;
             }
         }
 
-        // --- FUNGSI GO HOME ---
         function goHome() {
             resetAllActiveStates();
             
-            // Tampilkan kembali panel kanan saat di Home (hanya di PC)
             if (window.innerWidth >= 1024) {
                 document.getElementById('right-panel').classList.remove('hidden-panel');
             } else {
@@ -715,7 +1965,6 @@
             }
         }
         
-        // Handle window resize dynamically untuk mobile safety
         window.addEventListener('resize', () => {
            if(window.innerWidth < 1024) {
                document.getElementById('right-panel').classList.add('hidden-panel');
